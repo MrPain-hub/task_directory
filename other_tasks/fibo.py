@@ -83,3 +83,5 @@ if __name__ == "__main__":
     print()
     print(f"mfib за время {time_1}")
     print(f"fid_dynamic за время {time_2}")
+
+    for i in

@@ -1,36 +1,48 @@
-def func_1(n):
+from math import factorial as fac
+import time
+
+
+def func_2(num):
     """
     https://leetcode.com/problems/climbing-stairs/
     """
-    def factorial(k1, k2=1):
-        """
-        k1 > k2
-        k1!/(k1-k2)!
-        """
-        if k1 > k2:
-            return k1 * factorial(k1 - 1)
-        else:
-            return 1
+    cache = {}
+
+    def fact(n):
+        if n in cache:
+            return cache[n]
+        a = 1
+        for i in range(n):
+            a *= (i + 1)
+        cache[n] = a
+        return a
+    two = num // 2
+    one = num % 2
+    P = 0
+    while one <= num and two >= 0:
+        P += fact(one + two)/(fact(one) * fact(two))
+        one += 2
+        two -= 1
+    return int(P)
 
 
-    def Cm_n(m, n):
-        """
-        n > m
-        """
-        return factorial(n, m - 1)/factorial(m)
-
-
-
-    integer = n//2
-    remainder = n % 2
-
-    return factorial(integer)
-
-
-
-
+def func_3(num):
+    two = num // 2
+    one = num % 2
+    P = 0
+    while one <= num and two >= 0:
+        P += fac(one + two)/(fac(one) * fac(two))
+        one += 2
+        two -= 1
+    return int(P)
 
 
 if __name__ == "__main__":
-    n = 3
-    print(func_1(n))
+    n = 45
+    start = time.time()
+    print(func_3(n))
+    step_1 = time.time()
+    print(step_1 - start)
+    print(func_2(n))
+    print(time.time() - step_1)
+
